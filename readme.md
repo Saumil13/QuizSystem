@@ -12,7 +12,7 @@ The students will use any web technology they desire and will produce mobile app
 
 Technologies
 
-ASP, MYSQL Database, Twitter Bootstrap for CSS, jQuery as a JavaScript framework.
+ASP, MSSQL Database, Twitter Bootstrap for CSS, jQuery as a JavaScript framework.
 
 Team Members
 
