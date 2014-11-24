@@ -1,0 +1,53 @@
+body {
+padding-top: 20px;
+padding-bottom: 20px;
+background:#fcfcfc url(../images/bg.jpg) top center no-repeat;
+}
+
+.navbar {
+margin-bottom: 20px;
+}
+
+.navbar-btn {
+margin-left: 5px;
+}
+.navbar-brand{
+padding: 5px 15px;
+}
+
+.content-area{
+padding: 20px 15px;
+margin-bottom: 20px;
+color: inherit;
+background-color: #fefefe;
+border-radius: 4px;
+}
+
+.rightsidebar h2{
+margin:15px 0px 10px;
+font-size: 24px;
+color: #3977aa;
+}
+
+.leftsidebar {
+border-right:1px solid #c0c0c0;
+}
+.leftsidebar h2{
+margin:15px 0px 10px;
+font-size: 24px;
+color: #3977aa;
+}
+
+.bottom-area {
+background-color: #c7c7c7;
+padding: 12px 0px 15px;
+height:40px;
+color: #FFF;
+border-radius: 4px;
+font-size:12px;
+}
+.bottom-area p {
+color: #555;
+padding:0 5px;
+text-shadow: 1px 1px #fff;
+}
