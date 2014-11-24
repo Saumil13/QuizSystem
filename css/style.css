@@ -1,7 +1,11 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600&subset=latin-ext);
+
 body {
 padding-top: 20px;
 padding-bottom: 20px;
 background:#fcfcfc url(../images/bg.jpg) top center no-repeat;
+font-family: 'Titillium Web', sans-serif;
+font-weight: 300;
 }
 
 .navbar {
@@ -27,6 +31,8 @@ border-radius: 4px;
 margin:15px 0px 10px;
 font-size: 24px;
 color: #3977aa;
+font-family: 'Titillium Web', sans-serif;
+font-weight: 400;
 }
 
 .leftsidebar {
@@ -36,6 +42,8 @@ border-right:1px solid #c0c0c0;
 margin:15px 0px 10px;
 font-size: 24px;
 color: #3977aa;
+font-family: 'Titillium Web', sans-serif;
+font-weight: 400;
 }
 
 .bottom-area {
@@ -49,7 +57,7 @@ font-size:12px;
 .bottom-area p {
 color: #555;
 padding:0 5px;
-text-shadow: 1px 1px #fff;
+font-weight: 600;
 }
 .modal-dialog{
 width:320px;
