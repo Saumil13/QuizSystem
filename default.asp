@@ -1,3 +1,4 @@
+<!-- #include file="inc/inc_settings.asp" -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +13,8 @@
     <!-- #include file="inc/-slider.asp" -->
         <div class="row">
           <div class="col-md-8 leftsidebar">
-            <h2> Welcome to Quiz System </h2>
+            
+		<h2> Welcome to Quiz System </h2>
 		<p> Font awesome css test <i class="fa fa-user"></i> User icon  </p>
 		<p>Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here.  </p>
 		<p>Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here.  </p>

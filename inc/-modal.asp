@@ -7,7 +7,7 @@
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
               <h4 class="modal-title" id="Login">Login</h4>
             </div>
-            <form method="post" name ="Login" action="#" role="form">
+            <form method="post" name ="Login" action="process.asp?i=Login" role="form">
             <div class="modal-body">
                 <div class="form-group">
                   <label for="EMail"  class="control-label">E-Mail Address:</label>
@@ -34,7 +34,7 @@
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
               <h4 class="modal-title" id="Login">Register</h4>
             </div>
-              <form method="post" name ="Register" action="#" role="form">
+              <form method="post" name ="Register" action="process.asp?i=Register" role="form">
             <div class="modal-body">
                 <div class="form-group">
                   <input type="firstname" class="form-control" name="firstname"  placeholder="First Name" />

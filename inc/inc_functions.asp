@@ -1,4 +1,17 @@
 <%
+Function GeneratePassword(strData)
+If IsNull(strData) Then Exit Function
+Dim Password,KarakterBoyu,KacinciKarakter
+Const Karakterler = "0123456789"
+Randomize
+KarakterBoyu = Len(Karakterler)
+For x = 1 To strData
+KacinciKarakter = Int((KarakterBoyu * Rnd) + 1)
+Password = Password & Mid(Karakterler,KacinciKarakter,1)
+Next
+GeneratePassword = Password
+End Function
+
 ' FORM INPUT FILTERS 
 'SQL Injection Prevent Function
 Function QueryFilter(Str)
