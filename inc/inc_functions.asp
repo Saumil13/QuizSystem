@@ -12,6 +12,33 @@ Next
 GeneratePassword = Password
 End Function
 
+Function LoginControl()
+if Session("Auth_Token") ="" or Session("Login") = "" then
+LoginControl = False
+Session("Auth_Token") = ""
+Session("Login") = ""
+else
+
+strSQL = "Select Auth_Token from Members Where Auth_Token = '"&Session("Auth_Token")&"' and Active = 1 "
+
+Set lk = conn.execute(strSQL)
+if lk.eof then
+LoginControl = False
+Session("Auth_Token") = ""
+Session("Login") = ""
+else
+LoginControl = True
+end if
+lk.close : set lk = nothing
+end if
+end function
+
+Function LoginGate
+if not LoginControl() then
+response.redirect "Login.asp"
+end if
+end function
+
 ' FORM INPUT FILTERS 
 'SQL Injection Prevent Function
 Function QueryFilter(Str)

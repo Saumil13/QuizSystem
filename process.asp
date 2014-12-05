@@ -66,4 +66,64 @@ response.redirect "default.asp?H=1"
 ' Here we will implement sending activation mail to registered user.
 
 end sub
+
+
+Sub Login
+
+IF email<>"" and password<>"" Then 
+	strLogin = False 
+	Md5Password = Md5(password)
+		StrSQL = "Select ID, Name,SurName,Email FROM Members WHERE "
+		StrSQL = StrSQL & "EMail = '"&email&"' AND Password = '"&Md5Password&"' AND Active = 1"
+
+	set objRs = Conn.Execute(strSQL)
+		IF objRs.EOF Then
+			'USER NOT FOUND --------------------
+			Response.Redirect "default.asp?H=2"
+		Else
+			'Login Success ----------------------
+			strLogin = True 
+			Auth_Token = GeneratePassword(10)
+			UserID = objRS("ID")
+			Session("Login") = True
+			Session("UserID") = UserID
+			Session("Auth_Token") = Auth_Token
+			Session("Name") = objRS("Name")
+			Session("SurName") = objRS("SurName")
+			Session("EMail") = objRS("EMail")
+	
+		If strLogin = True Then 
+	
+			StrSQL = "SELECT * FROM Members WHERE ID = "&UserID&""
+			ObjRsYard.Open StrSQL, Conn, 1, 2
+				ObjRsYard("Auth_Token") = Auth_Token
+			ObjRsYard.Update
+			ObjRsYard.Close
+			Set ObjRsYard = Nothing
+			
+			' REDIRECT TO ACCOUNT PAGE ---------------
+			Response.Redirect "default.asp"
+	
+		End IF 
+	End IF
+	ObjRs.Close
+	Set ObjRs = Nothing
+Else
+	' EMail or Password values NULL -------------------
+	Response.Redirect "default.asp?H=3"
+End IF
+End Sub
+
+
+Sub Logout
+			Session("Login") = False
+			Session("UserID") = ""
+			Session("Auth_Token") = ""
+			Session("Name") = ""
+			Session("SurName") = ""
+			Session("EMail") = ""
+
+Response.Redirect "default.asp"
+
+End Sub
 %>

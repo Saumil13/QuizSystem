@@ -15,10 +15,24 @@
               <li><a href="#">About</a></li>
               <li><a href="#">How it works?</a></li>
             </ul>
+			<% if LoginControl() then %>
+			<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=Session("Name")%>&nbsp;<%=Session("SurName")%> <span class="caret"></span></a>
+             <ul class="dropdown-menu" role="menu">
+             <li><a href="#">Profile</a></li>
+             <li><a href="#">My Results</a></li>
+             <li class="divider"></li>
+             <li><a href="process.asp?i=Logout">Logout</a></li>
+             </ul>
+             </li>
+			 </ul>
+			  <% else %>
 			<ul class="nav navbar-nav navbar-right">
               <li><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#register"><i class="fa fa-plus"></i> Register</button></li>
               <li><button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#login"><i class="fa fa-user"></i> Sign in</button></li>
             </ul>
+			<% end if %>
           </div>
           <!--/.nav-collapse -->
         </div>

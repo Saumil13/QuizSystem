@@ -13,13 +13,15 @@
     <!-- #include file="inc/-slider.asp" -->
         <div class="row">
           <div class="col-md-8 leftsidebar">
-            
-		<h2> Welcome to Quiz System </h2>
-		<p> Font awesome css test <i class="fa fa-user"></i> User icon  </p>
-		<p>Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here.  </p>
-		<p>Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here.  </p>
-		<p>Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here. Text goes here.  </p>
-		
+            <h2> Welcome to Quiz System </h2>
+            <p>Whats new?</p>
+            <p>
+			Now users can register to the system. In future, they will have to activate their account through the e-mail.<br />
+			Users can login to the stsyem.<br />
+			Users will be informed with error/info messages.<br />
+			All queries and inputs are filtered with filter functions.<br />
+			Administration panel design is ready. For demo click <a href="admin/default.asp" target="_blank">here</a> 
+			</p>
           </div>
           <div class="col-md-4 rightsidebar">
             <h2> Create your free quiz </h2>
