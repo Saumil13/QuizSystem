@@ -9,6 +9,7 @@
     <!-- #include file="inc/-modal.asp" -->
       <!-- Static navbar -->
     <!-- #include file="inc/-navigation.asp" -->
+	<!-- #include file="inc/-err_messages.asp" -->
       <div class="content-area">
     <!-- #include file="inc/-slider.asp" -->
         <div class="row">
