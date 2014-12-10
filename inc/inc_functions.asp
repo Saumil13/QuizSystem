@@ -1,4 +1,15 @@
 <%
+function MemberName(strID)
+set fs = conn.execute("Select * from Members Where ID = "&strID&" ")
+if fs.eof then
+MemberName = "Unknown"
+else
+MemberName = fs("Name") &"&nbsp;"&fs("Surname")
+end if
+fs.close : set fs = nothing
+end function
+
+'------------------------------------------------------ Frontend Security
 Function GeneratePassword(strData)
 If IsNull(strData) Then Exit Function
 Dim Password,KarakterBoyu,KacinciKarakter
@@ -18,9 +29,7 @@ LoginControl = False
 Session("Auth_Token") = ""
 Session("Login") = ""
 else
-
 strSQL = "Select Auth_Token from Members Where Auth_Token = '"&Session("Auth_Token")&"' and Active = 1 "
-
 Set lk = conn.execute(strSQL)
 if lk.eof then
 LoginControl = False
@@ -35,7 +44,34 @@ end function
 
 Function LoginGate
 if not LoginControl() then
-response.redirect "Login.asp"
+response.redirect "default.asp?H=9"
+end if
+end function
+'------------------------------------------------------ Administration Panel Security
+Function AdminLoginControl()
+if Session("Auth_Token") ="" or Session("Login") = "" or Session("Admin") = "" then
+AdminLoginControl = False
+Session("Auth_Token") = ""
+Session("Login") = ""
+Session("Admin") = ""
+else
+strSQL = "Select Auth_Token from Members Where Auth_Token = '"&Session("Auth_Token")&"' and Active = 1 and Admin = 1"
+Set lk = conn.execute(strSQL)
+if lk.eof then
+AdminLoginControl = False
+Session("Auth_Token") = ""
+Session("Login") = ""
+Session("Admin") = ""
+else
+AdminLoginControl = True
+end if
+lk.close : set lk = nothing
+end if
+end function
+
+Function AdminLoginGate
+if not AdminLoginControl() then
+response.redirect "../default.asp?H=8"
 end if
 end function
 
@@ -67,7 +103,7 @@ Str = Replace(Str, "INSERT", "[INJ]",1,-1,1)
 Str = Replace(Str, "ORDER", "[INJ]",1,-1,1)
 Str = Replace(Str, "GROUP", "[INJ]",1,-1,1)
 Str = Replace(Str, "ALTER", "[INJ]",1,-1,1)
-Str = Replace(Str, "ADD", "[INJ]",1,-1,1)
+
 Str = Replace(Str, "MODIFY", "[INJ]",1,-1,1)
 Str = Replace(Str, "RENAME", "[INJ]",1,-1,1)
 Str = Replace(Str, Chr(39), "[INJ]", 1, -1, 1)
@@ -210,8 +246,25 @@ ElseIF ErrID = "4" Then
 ErrorMessage = "<div class=""alert alert-warning alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Attention!</strong> Please fill in <strong>all</strong> fields correctly to register.</div>"
 ElseIF ErrID = "5" Then
 ErrorMessage = "<div class=""alert alert-danger alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Error!</strong> Password does not match the confirm password.</div>"
+ElseIF ErrID = "6" Then
+ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Welcome!</strong> You have successfully logged in.</div>"
+ElseIF ErrID = "7" Then
+ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> You have successfully logged out.</div>"
+ElseIF ErrID = "8" Then
+ErrorMessage = "<div class=""alert alert-danger alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Forbidden!</strong> You don't have permission to access the requested page on this server.</div>"
+ElseIF ErrID = "9" Then
+ErrorMessage = "<div class=""alert alert-warning alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Attention!</strong> In order to access the requested page, please register to create an account. </div>"
+ElseIF ErrID = "10" Then
+ErrorMessage = "<div class=""alert alert-success alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> The entry added successfully.</div>"
+ElseIF ErrID = "11" Then
+ErrorMessage = "<div class=""alert alert-success alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> The changes have been successfully saved.</div>"
+ElseIF ErrID = "12" Then
+ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> The entry status has been successfully changed.</div>"
+ElseIF ErrID = "13" Then
+ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> The entry has been successfully deleted.</div>"
+
 Else
-ErrorMessage = "Contact with webmaster team."
+ErrorMessage = "<div class=""alert alert-danger alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Undefined Error!</strong> Contact with webmaster team.</div>"
 End IF
 
 End Function
