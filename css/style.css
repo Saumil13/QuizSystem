@@ -110,6 +110,16 @@ color:#990000;
 font-weight:bold;
 }
 
+.questions p{
+font-weight:600;
+}
+
+.questions span{
+background-color:#dddfff;
+  border-radius: 4px;
+  padding:2px;
+  margin: 0 6px 0px 0px;
+}
 
 @media (max-width: 767px) {
 .well img {
