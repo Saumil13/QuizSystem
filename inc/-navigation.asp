@@ -7,21 +7,27 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img alt="Brand" src="images/logo.png"></a>
+            <a class="navbar-brand" href="default.asp"><img alt="Brand" src="images/logo.png"></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">How it works?</a></li>
+              <li class="active"><a href="default.asp">Home</a></li>
+              <li><a href="about.asp">About</a></li>
+              <li><a href="how-it-works.asp">How it works?</a></li>
+			<% if LoginControl() then %>
+			  <li><a href="quizzes.asp">Quizzes</a></li>
+			<% end if %>
             </ul>
 			<% if LoginControl() then %>
 			<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=Session("Name")%>&nbsp;<%=Session("SurName")%> <span class="caret"></span></a>
              <ul class="dropdown-menu" role="menu">
-             <li><a href="#">Profile</a></li>
-             <li><a href="#">My Results</a></li>
+             <li><a href="profile.asp">Profile</a></li>
+             <li><a href="results.asp">My Results</a></li>
+			 	 <% if Session("Admin") = True then %>
+			 <li><a href="admin/">Admin Panel</a></li> 
+			 <% end if %>
              <li class="divider"></li>
              <li><a href="process.asp?i=Logout">Logout</a></li>
              </ul>
