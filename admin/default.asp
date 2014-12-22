@@ -103,7 +103,7 @@
                   </div>
                 </div>
               </div>
-              <a href="members.asp">
+              <a href="#">
                 <div class="panel-footer">
                   <span class="pull-left">View All Members</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

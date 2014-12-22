@@ -14,7 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-
+	<link href="skins/square/blue.css" rel="stylesheet">
     <!-- JavaScript Libraries
     ================================================== -->
     <script src="js/jquery.js"></script>

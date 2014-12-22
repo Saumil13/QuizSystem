@@ -1,6 +1,7 @@
 <%
 ' Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm,
 ' as set out in the memo RFC1321.
+
 Private Const BITS_TO_A_BYTE = 8
 Private Const BYTES_TO_A_WORD = 4
 Private Const BITS_TO_A_WORD = 32

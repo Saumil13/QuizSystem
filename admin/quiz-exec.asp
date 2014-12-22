@@ -69,6 +69,7 @@ end sub
 
 Sub Delete
 Conn.Execute("Delete FROM Quizzes Where ID = "&QID&"")
+conn.execute("delete from QuizResults Where QuizID = "&QID&" ")
 set rs = conn.execute("Select * from Questions Where QuizID = "&QID&" ")
 do while not rs.eof
 conn.execute("delete from Options Where QuesionID = "&rs("ID")&" ")

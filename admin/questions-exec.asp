@@ -47,6 +47,7 @@ QuestionID = objRS("ID")
 objRS.Close
 dim i : i = 1
 for each x in Request.Form("answer")
+
 if Cint(i) = Cint(isanswer) then
 isanswer2 = 1
 else
@@ -72,7 +73,7 @@ do while not rs2.eof
 answer2 = Request.Form("answer")(i)
 
 
-if Cint(rs2("ID")) = isanswer Then
+if i = Cint(isanswer) Then
 isanswer2 = 1
 else
 isanswer2 = 0
