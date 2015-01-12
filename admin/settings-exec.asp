@@ -14,6 +14,7 @@ mailserver 		= ClearText(request.form("mailserver"))
 mailaddress 	= ClearText(request.form("mailaddress"))
 smtpuser 		= ClearText(request.form("smtpuser"))
 smtppass 		= ClearText(request.form("smtppass"))
+rnotes	 		= request.form("rnotes")
 
 StrSQL = "SELECT * FROM Settings"
 objRS.Open StrSQL, Conn, 1, 2
@@ -25,6 +26,7 @@ objRS("MailServer") = mailserver
 objRS("MailAddress") = mailaddress
 objRS("MailSMTPUsername") = smtpuser
 objRS("MailSMTPPass") = smtppass
+objRS("ReleaseNotes") = rnotes
 
 objRS.Update
 objRS.Close

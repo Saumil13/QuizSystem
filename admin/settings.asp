@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <!-- #include file="inc/-head.asp" -->
+
   </head>
   <body>
     <div id="wrapper">
@@ -11,6 +12,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
+		  <!-- #include file="inc/-err_messages.asp" -->
             <h1 class="page-header">General Settings</h1>
           </div>
           <!-- /.col-lg-12 -->
@@ -21,10 +23,10 @@
           strSQL = "Select * From Settings"
           Set objRs = Conn.Execute(StrSQL)
           %>
-		  <div class="row">
-		  <!-- #include file="inc/-err_messages.asp" -->
-        <form action="settings-exec.asp" method="post">
-          <div class="form-group">
+<form action="settings-exec.asp" method="post">
+<div class="row">
+  <div class="col-md-6">
+  <div class="form-group">
             <label for="fname">Title of Website</label>
             <input type="text" class="form-control" name="title" value="<%=objRs("SiteTitle")%>" />
           </div>
@@ -54,22 +56,39 @@
           </div>
 		  <div class="form-group">
             <label for="lname">Mail SMTP Password</label>
-            <input type="text" class="form-control" name="smtppass" value="<%=objRs("MailSMTPPass")%>" />
+            <input type="password" class="form-control" name="smtppass" value="<%=objRs("MailSMTPPass")%>" />
           </div>
-          
-          <button type="submit" class="btn btn-default">Save</button>
-		  <br />
-        </form>
+  
+  </div>
+  <div class="col-md-6">
+	<div class="form-group">
+	<label for="lname">Release Notes</label>
+	<textarea name="rnotes" class="summernote"><%=objRs("ReleaseNotes")%></textarea>
+	</div>
+  </div>
+</div>
+<button type="submit" class="btn btn-success">Save</button>
+ </form>      
           <%
           objRs.Close
           Set objRs = Nothing
           %>
-		   </div>
         <!-- /.row -->
       </div>
       <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
     <!-- #include file="inc/-footer.asp" -->
+ <link rel="stylesheet" href="../css/summernote.css">
+  <script type="text/javascript" src="../js/summernote.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      $('.summernote').summernote({
+        height: 405
+      });
+
+    });
+  </script>
   </body>
 </html>
