@@ -42,6 +42,7 @@ lk.close : set lk = nothing
 end if
 end function
 
+' This function check whether user logged in or not if yes can access requested page. if not prevent to access.
 Function LoginGate
 if not LoginControl() then
 response.redirect "default.asp?H=9"
@@ -69,6 +70,7 @@ lk.close : set lk = nothing
 end if
 end function
 
+' This function check whether user logged in or not if yes can access requested page. if not prevent to access.
 Function AdminLoginGate
 if not AdminLoginControl() then
 response.redirect "../default.asp?H=8"
@@ -262,6 +264,8 @@ ElseIF ErrID = "12" Then
 ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> The entry status has been successfully changed.</div>"
 ElseIF ErrID = "13" Then
 ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> The entry has been successfully deleted.</div>"
+ElseIF ErrID = "14" Then
+ErrorMessage = "<div class=""alert alert-success alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> Thank you for activating your account. Your account has been successfully activated.</div>"
 
 Else
 ErrorMessage = "<div class=""alert alert-danger alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Undefined Error!</strong> Contact with webmaster team.</div>"

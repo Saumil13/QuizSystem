@@ -23,8 +23,8 @@ call UpdateProfile
 elseif req = "Logout" then
 call Logout
 
-elseif req = "ActivateMember" then
-call ActivateMember
+elseif req = "Activation" then
+call Activation
 
 elseif req = "ForgotPass" then
 call ForgotPass
@@ -76,27 +76,24 @@ for i=1 to cevapsayisi step 1
 next
 
 StrSQL = "SELECT * FROM QuizResults"
-objRS.Open StrSQL, Conn, 1, 2
+objRS.Open StrSQL, Conn, 1, 3
 
 objRS.AddNew
-objRS("MemberID") 		= Session("UserID")
-objRS("QuizID") 	= QID
-objRS("QuizDate") 		= GlobalTarih(now(),"no")
-objRS("Achievement") 	= totalpoints
+objRS("MemberID") 		 = Session("UserID")
+objRS("QuizID") 		 = QID
+objRS("QuizDate") 		 = GlobalTarih(now(),"no")
+objRS("Achievement") 	 = totalpoints
 objRS("NCorrectAnswers") = correctanswers
-objRS("NWrongAnswers") = wronganswers
-objRS("NEmptyAnswers") = emptyanswers
-objRS("TimeOut") = suredurum
+objRS("NWrongAnswers")   = wronganswers
+objRS("NEmptyAnswers")   = emptyanswers
+objRS("TimeOut") 		 = suredurum
 
 objRS.Update
+
+newID = objRS("ID")
 objRS.close : set objRS = nothing
 
-response.write "D : "&correctanswers &"</br>"
-response.write "Y : "&wronganswers &"</br>"
-response.write "B : "&emptyanswers &"</br>"
-response.write "Points : "&totalpoints &"</br>"
-response.write "Result has been successfully calculated."
-
+response.redirect "resultquiz.asp?ResultID="&newID
 
 End Sub
 
@@ -129,10 +126,45 @@ objRS("Admin") = 0
 objRS.Update
 
 objRS.Close : set objRS = Nothing
-response.redirect "default.asp?H=1"
-' Successfuly Registered , will send activation mail ---------------
-' Here we will implement sending activation mail to registered user.
 
+Recipient = email
+Subject   = "Member Confirmation"
+Message   = "<p><a href=""http://iusquizsystem.com"" target=""_Blank""><img src=""http://iusquizsystem.com/images/logo.png"" /></a><br /><br />"&_
+"Welcome "&firstname&"&nbsp;"&lastname&",<br /><br />"&_
+"Thank you for registering on IUS Quiz System<br /><br />Please activate your account by clicking the following link:<br /><br />"&_
+
+"<a href=""http://iusquizsystem.com/process.asp?i=Activation&ID="&ActivationCode&""" target=""_blank""><strong>Activate My Account</strong></a> <br /><br />"&_
+"Yours faithfully...<br /><br /><strong>IUS CS498 Project Team | 2014</strong></p>"
+
+SendMail "",Recipient, Subject, Message
+
+response.redirect "default.asp?H=1"
+
+end sub
+
+Sub Activation
+
+Set rs = conn.execute("Select * from Members Where ActivationCode = '"&QID&"' ")
+if rs.eof then
+response.redirect "Default.asp"
+else
+conn.execute("Update Members Set Active = 1 Where ID = "&rs("ID")&" ")
+
+	Auth_Token = GeneratePassword(10)
+	
+			Session("Login") = True
+			Session("UserID") = rs("ID")
+			Session("Auth_Token") = Auth_Token
+			Session("Name") = rs("Name")
+			Session("SurName") = rs("SurName")
+			Session("EMail") = rs("EMail")
+			Session("Admin") = True
+
+	conn.execute("Update Members Set Auth_Token = '"&Auth_Token&"' Where ID = "&rs("ID")&" ")
+	end if
+	rs.close : set rs = nothing
+	
+response.redirect "profile.asp?H=14"
 end sub
 
 
