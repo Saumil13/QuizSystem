@@ -1,7 +1,9 @@
 <!-- #include file="inc/inc_settings.asp" -->
 <!DOCTYPE html>
 <html lang="en">
-<% QuizID = NumberControl(request.querystring("ID"))
+<% 
+' we are listing selected quiz details from query string with ID value.
+QuizID = NumberControl(request.querystring("ID"))
 Set rs = conn.execute("Select * from Quizzes Where ID = "&QuizID&" and Active = 1 ")
 if rs.eof or not LoginControl() then 
 Response.redirect "Default.asp?H=0"
@@ -40,7 +42,7 @@ var yeni_zaman="";
 var suredurum = 1;
 if(kalan_dakika>0 || kalan_saniye>0 || kalan_saat>0 ){ 
 yeni_zaman=kalan_dakika+":"+kalan_saniye; 
-if(kalan_dakika==0 && kalan_saat==0 && kalan_saniye>0 ){yeni_zaman="<font style='font-size:18px;color:red;'>"+yeni_zaman+"</font>";} 
+if(kalan_dakika==0 && kalan_saat==0 && kalan_saniye>0 ){yeni_zaman="<font style='font-size:60px;color:red;'>"+yeni_zaman+"</font>";} 
 }else{ 
 yeni_zaman="0";
 suredurum=0;
@@ -96,9 +98,9 @@ LoginGate()
 			</form>
           </div>
           <div class="col-md-4 rightsidebar">
-            <h4><%=Session("Name")%>&nbsp;<%=Session("SurName")%> </h4>
-            <p>Duration : <span id='kalan_zaman'></span></p>
-            <p>This Quiz Created By : <%=CreatedBy%></p>
+		  <div class="time">
+            <p class="text-center"><strong>Duration</strong><br /> <span id='kalan_zaman'></span></p>
+			</div>
           </div>
         </div>
       </div>
