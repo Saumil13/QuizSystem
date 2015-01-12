@@ -32,6 +32,8 @@ Response.CacheControl = "no-cache"
 	Set Conn = Server.CreateObject("ADODB.Connection")
 	Conn.open = "Provider=SQLNCLI11;Server="&db_server&";Database="&db_name&";Uid="&db_user&";Pwd="&db_pass&";"
 	
+	
+'here we are connecting settings table and we assigned them into str<ColomnName> variables. Once we did it we can use them on website.
 	Set ObjRsYard = Server.CreateObject("ADODB.Recordset")
 	Set ObjRs = Server.CreateObject("ADODB.Recordset")
 	strSQL = "SELECT * FROM Settings"
@@ -51,3 +53,4 @@ objRS.Close
 %>
 <!-- #include file="inc_md5.asp" -->
 <!-- #include file="inc_functions.asp" -->
+<!--#include file="inc_mail.asp"-->	

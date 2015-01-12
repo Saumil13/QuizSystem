@@ -21,7 +21,7 @@
 			<% if LoginControl() then %>
 			<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=Session("Name")%>&nbsp;<%=Session("SurName")%> <span class="caret"></span></a>
+             <a href="profile.asp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=Session("Name")%>&nbsp;<%=Session("SurName")%> <span class="caret"></span></a>
              <ul class="dropdown-menu" role="menu">
              <li><a href="profile.asp">Profile</a></li>
              <li><a href="results.asp">My Results</a></li>

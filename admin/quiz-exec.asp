@@ -11,7 +11,7 @@ QD 			= QueryFilter(Request.QueryString("D"))
 'Form Parameters
 title 		= ClearText(request.form("title"))
 duration 	= NumberControl(request.form("time"))
-
+description = ClearText(request.form("description"))
 act 		= dbBoolControl(Request.Form("active"))
 qact 		= dbBoolControl(Request.querystring("qactive"))
 
@@ -33,6 +33,7 @@ StrSQL = "SELECT * FROM Quizzes"
 objRS.Open StrSQL, Conn, 1, 2
 objRS.addnew
 objRS("Title") = title
+objRS("Description") = description
 objRS("Time") = duration
 objRS("Active") = act
 objRS("MemberID") = Session("UserID")
@@ -49,9 +50,10 @@ StrSQL = "SELECT * FROM Quizzes Where ID = "&QD&" "
 objRS.Open StrSQL, Conn, 1, 2
 
 objRS("Title") = title
+objRS("Description") = description
 objRS("Time") = duration
 objRS("Active") = act
-objRS("MemberID") = Session("UserID")
+'objRS("MemberID") = Session("UserID")
 
 objRS.Update
 objRS.Close

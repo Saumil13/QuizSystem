@@ -75,6 +75,10 @@
             <label for="fname">Quiz Title</label>
             <input type="text" class="form-control" name="title" value="" />
           </div>
+		  <div class="form-group">
+            <label for="fname">Short Description</label>
+            <input type="text" class="form-control" name="description" value="" />
+          </div>
           <div class="form-group">
             <label for="lname">Time (second)</label>
             <input type="number" class="form-control" name="time" value="" />
@@ -84,7 +88,7 @@
             <input type="checkbox" name="active" value="1" > Active
             </label>
           </div>
-          <button type="submit" class="btn btn-default">Save</button>
+          <button type="submit" class="btn btn-success">Save</button>
         </form>
         <% end sub %>
         <% Sub Edit %>
@@ -100,6 +104,10 @@
             <label for="fname">Quiz Title</label>
             <input type="text" class="form-control" name="title" value="<%=objRs("Title")%>" />
           </div>
+		  <div class="form-group">
+            <label for="fname">Short Description</label>
+            <input type="text" class="form-control" name="description" value="<%=objRs("Description")%>" />
+          </div>
           <div class="form-group">
             <label for="lname">Time (second)</label>
             <input type="number" class="form-control" name="time" value="<%=objRs("Time")%>" />
@@ -109,7 +117,7 @@
             <input type="checkbox" name="active" value="1" <% IF objRs("Active") = True Then Response.Write("checked=""checked""") %>> Active
             </label>
           </div>
-          <button type="submit" class="btn btn-default">Save</button>
+          <button type="submit" class="btn btn-success">Save</button>
         </form>
         <%
           objRs.Close

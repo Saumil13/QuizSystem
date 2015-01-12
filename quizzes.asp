@@ -22,12 +22,12 @@ LoginGate()
 do while not rs.eof 
 Minutes = rs("Time")/60
 %>
-<div class="col-xs-12 col-sm-6 col-md-3">	
+<div class="col-xs-12 col-sm-6 col-md-4">	
 <div class="well">
 <div class="media">
 <div class="media-body">
 <h4 class="media-heading"><%=rs("Title")%></h4>
-<p>Short description</p>
+<p><%=rs("Description")%></p>
 <ul class="list-inline list-unstyled">
 <li><span><i class="glyphicon glyphicon-play-circle"></i> <a href="doquiz.asp?ID=<%=rs("ID")%>">Select &amp; Begin</a></span></li>
 <li>|</li>

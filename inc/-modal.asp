@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <!-- Login screen modal frame -->
+      <!-- Register screen modal frame -->
       <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
