@@ -16,13 +16,19 @@
           <div class="col-md-8 leftsidebar">
             <h2> Welcome to Quiz System </h2>
             <p>Whats new?</p>
+			<%
+			' we are getting release notes from settings table. it can modify from admin panel in general settings section.
+          strSQL = "Select * From Settings"
+          Set objRs = Conn.Execute(StrSQL)
+          %>
             <p>
-			Now users can register to the system. In future, they will have to activate their account through the e-mail.<br />
-			Users can login to the stsyem.<br />
-			Users will be informed with error/info messages.<br />
-			All queries and inputs are filtered with filter functions.<br />
-			Administration panel design is ready. For demo click <a href="admin/default.asp" target="_blank">here</a> 
+			
+			<%=HTMLRead(objRs("ReleaseNotes"))%>
 			</p>
+		<%
+          objRs.Close
+          Set objRs = Nothing
+          %>
           </div>
           <div class="col-md-4 rightsidebar">
             <h2> Create your free quiz </h2>
