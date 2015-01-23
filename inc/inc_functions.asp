@@ -9,6 +9,16 @@ end if
 fs.close : set fs = nothing
 end function
 
+function GetQuizName(strID)
+set fs = conn.execute("Select * from Quizzes Where ID = "&strID&" ")
+if fs.eof then
+GetQuizName = "Unknown"
+else
+GetQuizName = fs("Title")
+end if
+fs.close : set fs = nothing
+end function
+
 '------------------------------------------------------ Frontend Security
 Function GeneratePassword(strData)
 If IsNull(strData) Then Exit Function
@@ -266,7 +276,8 @@ ElseIF ErrID = "13" Then
 ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> The entry has been successfully deleted.</div>"
 ElseIF ErrID = "14" Then
 ErrorMessage = "<div class=""alert alert-success alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Success!</strong> Thank you for activating your account. Your account has been successfully activated.</div>"
-
+ElseIF ErrID = "15" Then
+ErrorMessage = "<div class=""alert alert-info alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Attention!</strong> The email address is already taken. Please choose another one.</div>"
 Else
 ErrorMessage = "<div class=""alert alert-danger alert-dismissable""> <button type=""button"" class=""close"" data-dismiss=""alert"" aria-hidden=""true"">&times;</button> <strong>Undefined Error!</strong> Contact with webmaster team.</div>"
 End IF

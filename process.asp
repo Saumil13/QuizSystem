@@ -37,6 +37,8 @@ response.redirect "default.asp"
 end if
 %>
 <%
+
+
 Sub CalcQuiz
 
 dim i,correctanswers,wronganswers
@@ -109,9 +111,11 @@ Auth_Token = GeneratePassword(10)
 ActivationCode = GeneratePassword(10)
 Md5Password = Md5(password)
 
-StrSQL = "SELECT * FROM Members"
+StrSQL = "SELECT * FROM Members Where EMail = '"&email&"' "
 objRS.Open StrSQL, Conn, 1, 2
-
+if not objRS.eof then
+response.redirect "default.asp?H=15"
+end if
 objRS.AddNew
 objRS("Name") 		= firstname
 objRS("Surname") 	= lastname

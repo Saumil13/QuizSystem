@@ -23,6 +23,8 @@
           	Call Edit
           Elseif Page = "Add" then
           	Call Add
+			 Elseif Page = "Results" then
+          	Call Results
           else
           Page = "Overview"
           End IF
@@ -60,6 +62,7 @@
                   <% End IF %>
                   <a href="quiz.asp?Pages=Edit&ID=<%=objRs("ID")%>"><img src="../images/edit.png" alt="Edit" width="16" height="16" /></a>
                   <a href="quiz-exec.asp?i=Delete&ID=<%=objRs("ID")%>"><img src="../images/delete.png" alt="Delete" width="16" height="16" /></a>
+                  <a href="quiz.asp?Pages=Results&ID=<%=objRs("ID")%>">Results</a>
                 </td>
               </tr>
               <% objRs.movenext : loop : objRs.close : set objRs = nothing %>
@@ -67,6 +70,46 @@
           </table>
         </div>
         <% End IF %>
+		<% sub Results %>
+		        <div class="row">
+		  <!-- #include file="inc/-err_messages.asp" -->
+          <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Achievement</th>
+                <th>Correct A.</th>
+                <th>Wrong A.</th>
+                <th>Empty A.</th>
+                <th>Quiz Date</th>
+                <th>Completed</th>
+             
+              </tr>
+            </thead>
+            <tbody>
+              <%
+			  strID = QueryFilter(Request.QueryString("ID"))
+			  set objRs = conn.execute("Select * from QuizResults Where QuizID = "&strID&" ")
+                do while not objRs.eof 
+                
+                %>
+              <% set questioncount = conn.execute("Select count(ID) as Count from Questions Where QuizID = "&objRs("ID")&" ") %>
+              <tr <% if objRs("Timeout") = False then Response.Write("class=""success""") Else Response.Write("class=""danger""") End If%>>
+                <td><%=MemberName(objRs("MemberID"))%></td>
+                <td><%=objRs("Achievement")%></td>
+                <td><%=objRs("NCorrectAnswers")%></td>
+                <td><%=objRs("NWrongAnswers")%></td>
+                <td><%=objRs("NEmptyAnswers")%></td>
+                <td><%=objRs("QuizDate")%></td>
+                <td><% if objRs("Timeout") = False then %>Completed<% else %>Timeout <% end if %></td>
+     
+              </tr>
+              <% objRs.movenext : loop : objRs.close : set objRs = nothing %>
+            </tbody>
+          </table>
+        </div>
+		
+		<% end sub %>
         <% Sub Add %>
         <h4>Add New Quiz</h4>
         <br />
