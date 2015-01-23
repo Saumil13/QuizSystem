@@ -89,55 +89,43 @@ uncompquizzes.close : set uncompquizzes = nothing
           <!--/col-3-->
 
           <div class="col-sm-9" style="" contenteditable="false">
-            <div class="panel panel-default">
-              <div class="panel-heading"> <i class="fa fa-newspaper-o"></i> Whats new on quiz system?</div>
-              <div class="panel-body"> 
-			 <%
-          strSQL = "Select * From Settings"
-          Set objRs = Conn.Execute(StrSQL)
-          %>
-            <p>
-			<%=HTMLRead(objRs("ReleaseNotes"))%>
-			</p>
-		<%
-          objRs.Close
-          Set objRs = Nothing
-          %>
-              </div>
-            </div>
-            <div class="panel panel-default target">
-			
-
-              <div class="panel-heading" contenteditable="false">Last 3 quizzes from you</div>
-              <div class="panel-body">
-                <div class="row">
-<% ' Last 3 quiz from user.
-set rs = conn.execute("select top 3 * from Quizzes Where MemberID = "&strID&" and Active = 1 Order by ID desc")
-do while not rs.eof 
-Minutes = rs("Time")/60
-%>
-<div class="col-xs-12 col-sm-6 col-md-4">	
-<div class="well">
-<div class="media">
-<div class="media-body">
-<h4 class="media-heading"><%=rs("Title")%></h4>
-<p><%=rs("Description")%></p>
-<ul class="list-inline list-unstyled">
-<li><span><i class="glyphicon glyphicon-play-circle"></i> <a href="doquiz.asp?ID=<%=rs("ID")%>">Select &amp; Begin</a></span></li>
-<li>|</li>
-<li>
-<span><i class="fa fa-clock-o"></i> <%=formatnumber(Minutes,2)%> mins</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<% rs.movenext : loop : rs.close : set rs = nothing %>
-
-                </div>
-              </div>
-            </div>
+		        <div class="row">
+		 
+          <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>Quiz Name</th>
+                <th>Achievement</th>
+                <th>Correct A.</th>
+                <th>Wrong A.</th>
+                <th>Empty A.</th>
+                <th>Quiz Date</th>
+                <th>Completed</th>
+             
+              </tr>
+            </thead>
+            <tbody>
+              <%
+			 
+			  set objRs = conn.execute("Select * from QuizResults Where MemberID = "&Session("UserID")&" ")
+                do while not objRs.eof 
+                
+                %>
+              <% set questioncount = conn.execute("Select count(ID) as Count from Questions Where QuizID = "&objRs("ID")&" ") %>
+              <tr <% if objRs("Timeout") = False then Response.Write("class=""success""") Else Response.Write("class=""danger""") End If%>>
+                <td><%=GetQuizName(objRs("QuizID"))%></td>
+                <td><%=objRs("Achievement")%></td>
+                <td><%=objRs("NCorrectAnswers")%></td>
+                <td><%=objRs("NWrongAnswers")%></td>
+                <td><%=objRs("NEmptyAnswers")%></td>
+                <td><%=objRs("QuizDate")%></td>
+                <td><% if objRs("Timeout") = False then %>Completed<% else %>Timeout <% end if %></td>
+     
+              </tr>
+              <% objRs.movenext : loop : objRs.close : set objRs = nothing %>
+            </tbody>
+          </table>
+        </div>
            
           </div>
         </div>
